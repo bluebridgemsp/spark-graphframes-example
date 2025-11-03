@@ -3,21 +3,6 @@ from graphframes.lib import Pregel
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import sum, lit, col, array, when, coalesce, array, array_append, collect_list, create_map, element_at
 
-REPORT_PATH = "./.data/graph_output.md"
-
-def write_text_to_file(content: str) -> None:
-    with open(REPORT_PATH, "a") as f:
-        f.write(content + "\n")
-
-
-def write_heading_to_file(level: int, content: str) -> None:
-    heading = "#" * level + " " + content + "\n\n"
-    write_text_to_file(heading)
-
-def new_file() -> None:
-    with open(REPORT_PATH, "w") as f:
-        f.write("")
-    
 spark = (
     SparkSession.builder.appName("MalRankApp")
     .config("spark.jars.packages", "io.graphframes:graphframes-spark4_2.13:0.9.3")

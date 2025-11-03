@@ -35,12 +35,6 @@ If you have `uv` installed, set up the environment as follows:
       source .venv/bin/activate
       ```
 
-    - On Windows:
-
-      ```bash
-      .\.venv\Scripts\activate
-      ```
-
 ### Using `venv` and `pip`
 
 If you don't have `uv`, you can manually create a virtual environment and install dependencies:
@@ -53,17 +47,9 @@ If you don't have `uv`, you can manually create a virtual environment and instal
 
 2. Activate the virtual environment:
 
-    - On Unix or macOS:
-
-      ```bash
-      source .venv/bin/activate
-      ```
-
-    - On Windows:
-
-      ```bash
-      .\.venv\Scripts\activate
-      ```
+    ```bash
+    source .venv/bin/activate
+    ```
 
 3. Install dependencies:
 
