@@ -2,7 +2,7 @@ from graphframes import GraphFrame
 from graphframes.lib import Pregel
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import sum, lit, col, array, when, coalesce, array
-from data import data_set1, data_set2
+from data import data_set1, data_set2, data_set3
 
 
 def main():
@@ -19,13 +19,20 @@ def main():
     experiments = [
         # max_iter,k, vertices, edges
         # Data Set 1
-        (5, 0.5, data_set1.get_vertex_df(spark), data_set1.get_edge_df(spark)),
+        # (5, 0.5, data_set1.get_vertex_df(spark), data_set1.get_edge_df(spark)),
         # Data Set 2
-        (3, 0.5, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
-        (4, 0.5, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
-        (5, 0.5, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
-        (5, 0.65, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
-        (5, 0.8, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
+        # (3, 0.5, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
+        # (4, 0.5, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
+        # (5, 0.5, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
+        # (5, 0.65, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
+        # (5, 0.8, data_set2.get_vertex_df(spark), data_set2.get_edge_df(spark)),
+        # Data Set 3
+        (3, 0.5, data_set3.get_vertex_df(spark), data_set3.get_edge_df(spark)),
+        (5, 0.5, data_set3.get_vertex_df(spark), data_set3.get_edge_df(spark)),
+        (10, 0.5, data_set3.get_vertex_df(spark), data_set3.get_edge_df(spark)),
+        (3, 0.8, data_set3.get_vertex_df(spark), data_set3.get_edge_df(spark)),
+        (5, 0.8, data_set3.get_vertex_df(spark), data_set3.get_edge_df(spark)),
+        (10, 0.8, data_set3.get_vertex_df(spark), data_set3.get_edge_df(spark)),
     ]
 
     for i, (max_iter, k, v, e) in enumerate(experiments):
@@ -38,11 +45,11 @@ def main():
         print(f"Max Iterations: {max_iter}\n")
     
         g = GraphFrame(v, e)
-        print("Vertices:")
-        g.vertices.show(v.count(), truncate=False)
-        print("")
-        print("Edges:")
-        g.edges.show(e.count(), truncate=False)
+        # print("Vertices:")
+        # g.vertices.show(v.count(), truncate=False)
+        # print("")
+        # print("Edges:")
+        # g.edges.show(e.count(), truncate=False)
 
         backward_message_expr = (
             when(
@@ -89,7 +96,7 @@ def main():
         )
 
         print("Result: Vertices with MalRank results:")
-        result_df.show(truncate=False)
+        result_df.show(result_df.count(), truncate=False)
         result_df.unpersist()
 
     spark.stop()
