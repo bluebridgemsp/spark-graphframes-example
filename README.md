@@ -18,7 +18,7 @@ If you have `uv` installed, set up the environment as follows:
 1. Create a virtual environment:
 
     ```bash
-    uv env
+    uv venv
     ```
 
 2. Install dependencies:
